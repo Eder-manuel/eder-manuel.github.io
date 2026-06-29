@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eder Daniel Manuel Leon — Educador Tecnológico</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0f0f0f;
+    --white: #ffffff;
+    --gray: #888888;
+    --light: #f5f5f5;
+    --accent: #2B4BFF;
+    --border: #e8e8e8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 80px 0 60px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  .contact-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.4s forwards;
+  }
+
+  .contact-row a, .contact-row span {
+    font-size: 13px;
+    color: var(--gray);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .contact-row a:hover { color: var(--accent); }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 32px 120px;
+  }
+
+  /* ── SECTION ── */
+  section {
+    padding-top: 64px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 64px;
+  }
+
+  section:last-child { border-bottom: none; }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 36px;
+  }
+
+  /* ── PERFIL ── */
+  .perfil p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #333;
+    font-weight: 300;
+    max-width: 640px;
+  }
+
+  /* ── EXPERIENCIA ── */
+  .job {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 24px;
+    margin-bottom: 48px;
+  }
+
+  .job:last-child { margin-bottom: 0; }
+
+  .job-org {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--black);
+    grid-column: 1;
+  }
+
+  .job-role {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    grid-column: 1;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .job-year {
+    font-size: 12px;
+    color: var(--gray);
+    font-weight: 400;
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+    align-self: start;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+
+  .job-desc {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.65;
+    grid-column: 1 / -1;
+    margin-top: 8px;
+  }
+
+  .job-desc li {
+    list-style: none;
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .job-desc li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--border);
+  }
+
+  /* ── HABILIDADES ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .skill-item {
+    border-top: 2px solid var(--border);
+    padding-top: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .skill-item:hover { border-color: var(--accent); }
+
+  .skill-cat {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+
+  .skill-detail {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  /* ── PROYECTOS ── */
+  .project {
+    margin-bottom: 48px;
+    padding-left: 20px;
+    border-left: 2px solid var(--accent);
+  }
+
+  .project:last-child { margin-bottom: 0; }
+
+  .project-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+
+  .project-desc {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray);
+    background: var(--light);
+    border-radius: 4px;
+    padding: 4px 10px;
+  }
+
+  .project-link {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: opacity 0.2s;
+  }
+
+  .project-link:hover { opacity: 0.65; }
+
+  /* ── FORMACIÓN ── */
+  .edu {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .edu-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--black);
+  }
+
+  .edu-institution {
+    font-size: 14px;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 40px 32px;
+    font-size: 12px;
+    color: #bbb;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    header, main { padding-left: 20px; padding-right: 20px; }
+    .job { grid-template-columns: 1fr; }
+    .job-year { grid-column: 1; grid-row: auto; text-align: left; }
+    .edu { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="label">Currículum Vitae</span>
+  <h1>Eder Daniel<br>Manuel Leon</h1>
+  <div class="contact-row">
+    <a href="tel:9515875994">951 587 5994</a>
+    <a href="mailto:eder.manuel@outlook.com">eder.manuel@outlook.com</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- PERFIL -->
+  <section class="perfil reveal">
+    <p class="section-title">Perfil</p>
+    <p>Educador tecnológico con amplia experiencia en la optimización de herramientas digitales. Transformo la relación de los niños con la tecnología, convirtiéndola en una aliada para sus proyectos personales y académicos. Enfocado en creatividad, pensamiento crítico y uso responsable, ético y seguro de la tecnología en entornos educativos.</p>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section class="reveal">
+    <p class="section-title">Experiencia</p>
+
+    <div class="job">
+      <div class="job-org">Colegio Las Águilas</div>
+      <div class="job-year">2013 — actual</div>
+      <div class="job-role">Docente de Informática · Primaria y Preescolar</div>
+      <ul class="job-desc">
+        <li>Programas de alfabetización digital enfocados en el uso creativo y seguro de herramientas tecnológicas.</li>
+        <li>Robótica educativa con metodología Editorial CAZE.</li>
+        <li>Gestión de plataformas de aprendizaje y soporte técnico para continuidad académica.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-org">Colegio Geselle</div>
+      <div class="job-year">2016</div>
+      <div class="job-role">Docente de Robótica · Primaria</div>
+      <ul class="job-desc">
+        <li>Taller de robótica educativa con metodología Editorial CAZE.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-org">Escuela de Alto Rendimiento</div>
+      <div class="job-year">2015</div>
+      <div class="job-role">Docente de Robótica · Secundaria</div>
+      <ul class="job-desc">
+        <li>Taller de robótica educativa con metodología Editorial CAZE.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-org">Colegio Rufino Tamayo</div>
+      <div class="job-year">2015</div>
+      <div class="job-role">Docente de Robótica · Primaria</div>
+      <ul class="job-desc">
+        <li>Taller de robótica educativa con metodología Editorial CAZE.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-org">Colegio Lion Kids</div>
+      <div class="job-year">2013</div>
+      <div class="job-role">Docente de Robótica · Preescolar</div>
+      <ul class="job-desc">
+        <li>Taller de robótica educativa con metodología Editorial CAZE.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section class="reveal">
+    <p class="section-title">Habilidades Técnicas</p>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-cat">Gestión Educativa</div>
+        <div class="skill-detail">Administración de G Suite para centros educativos</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Programación</div>
+        <div class="skill-detail">Scratch · Pensamiento computacional para niños</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Robótica</div>
+        <div class="skill-detail">Robótica educativa · Editorial Grupo Educare</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Diseño y Multimedia</div>
+        <div class="skill-detail">Canva avanzado · Diseño Web Jr.</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Soporte Técnico</div>
+        <div class="skill-detail">Mantenimiento preventivo y correctivo de equipos · Hardware y Software</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section class="reveal">
+    <p class="section-title">Proyectos de Innovación</p>
+
+    <div class="project">
+      <div class="project-name">Salón del Futuro</div>
+      <p class="project-desc">Laboratorio de Aprendizaje Activo diseñado para fomentar la colaboración, la investigación y la experimentación tecnológica. Comprende una zona de colaboración para trabajo en equipo, un centro de investigación con estaciones de análisis crítico, un estudio multimedia con tecnología Chroma Key y un espacio maker con hardware y software educativo.</p>
+      <div class="project-tags">
+        <span class="tag">Aprendizaje activo</span>
+        <span class="tag">Maker</span>
+        <span class="tag">Multimedia</span>
+        <span class="tag">Colaboración</span>
+      </div>    </div>
+
+    <div class="project">
+      <div class="project-name">Podcast Escolar "Las Águilas en acción"</div>
+      <p class="project-desc">Diseño y producción de una serie de podcasts con alumnos de tercer grado, integrando tecnología y currículo académico. Desarrolló habilidades de expresión oral, guionismo, síntesis de información y alfabetización sonora. Los alumnos pasaron de consumidores a creadores de contenido responsable.</p>
+      <div class="project-tags">
+        <span class="tag">Podcasting</span>
+        <span class="tag">Creación de contenido</span>
+        <span class="tag">Spotify</span>
+      </div>
+      <a class="project-link" href="https://open.spotify.com/show/6N2m0k2tGsPQMh11BtgsEQ" target="_blank" rel="noopener">Escuchar en Spotify →</a>
+    </div>
+  </section>
+
+  <!-- FORMACIÓN -->
+  <section class="reveal">
+    <p class="section-title">Formación Académica</p>
+    <div class="edu">
+      <div>
+        <div class="edu-title">Licenciatura en Informática</div>
+        <div class="edu-institution">Universidad del Golfo de México · Pasante</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>eder.manuel@outlook.com · 951 587 5994</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
